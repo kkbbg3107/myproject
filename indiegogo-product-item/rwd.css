@@ -1,0 +1,223 @@
+
+
+@media screen and (min-width: 768px) {
+
+        .banner-text h2 {
+                font-size: 3rem;
+        }
+
+        .banner-text h3 {
+                font-size: 1.5rem;
+        }
+
+
+        .row-body {
+                display: flex;
+                justify-content: flex-end;
+        }
+
+        .filter,.radio-btn{
+                display: block;
+        }
+
+        
+
+        .Category-group {
+                display: none;
+        }
+
+        .search {
+                margin: 3rem 0 2rem 0;
+                height: 2.5rem;
+        }
+
+
+        .sort-info {
+                display: flex;
+                justify-content: flex-end;
+                padding: 2rem 0 0 0;
+                border-top: 1px solid #aaaaaa;
+        }
+
+        .sort-info span {
+                padding: 0.7rem 0 0;
+                margin: 0 1rem 0 0;
+                font-size: 0.75rem;
+                color: #2A2A2A;
+        }
+
+        .filter-category .dropdown{
+                position: relative;
+                right: 1rem;
+        }
+
+        .dropdown button[type="button"] {
+                background-color: #fff;
+                color: #000;
+                border: none;                 
+        }
+        
+
+        .filter-result {
+                padding: 2rem 0;
+                font-size: 1rem;
+                color: #2A2A2A;
+        }
+
+        .filter-category {
+                margin: 0 0 2.5rem;
+                color: #2A2A2A;
+                font-size: 0.9rem;                
+        }
+
+        
+
+        .filter-category-title,.radio-btn-title {
+                margin: 0 0 1rem;
+                color: #A8A8A8;
+                font-size: 0.75rem;
+        }
+
+        .radio-btn::before{
+                content: "";
+                width: 12.5rem;
+                height: 1px;
+                margin: 0 0 2.5rem;
+                display: block;
+                background-color: #aaa;
+        }
+
+        .radio-btn{                     
+                display: flex;
+                flex-direction: column;                
+        }
+
+        .radio-btn span{
+                margin: 0 0 0.7rem;     
+        }
+
+        .footer{
+                position: relative;
+        }
+
+        .col-md-3{
+                position: absolute;
+                left:75%;
+        }
+
+        .col-md-9{
+                right: 25%;
+                position: absolute;
+        }
+
+        .email-button{
+                width: 100%;
+        }
+
+        .footer-border,.footer-social{
+                border: none;
+        }
+
+        .footer-social{        
+                width: 100%;        
+                flex-direction: row;
+                justify-content: center; 
+                border-bottom: 1px solid #aaa;
+                margin: 0 0 1.2rem;                           
+        }
+        #dollar-btn{
+                width: 70%;
+        }     
+
+        .footer-social::after{
+                content: "";
+                width: 100%;
+                height: 1px;
+                background-color: transparent;                
+        }
+
+        .footer-copyright{                        
+                padding: 0 0 0.7rem;
+        }
+}
+
+@media screen and (min-width: 1001px) {
+        .wrap{                
+                padding: 0 4rem;
+        }
+
+        .header{
+                display: block;                
+        }
+
+        .header-explore{
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                font-weight: 600;       
+        }
+
+        .header-explore a , .header-explore .dropdown{
+                padding: 0.75rem;
+                color: #000;
+        }
+
+        .header-explore h1{
+                font-size: 2rem;
+                color: #E51075;  
+                font-weight: 800;                             
+        }
+
+        .header-sign{                
+                position: absolute;
+                right: 10%;
+                top: 30%;                
+        }
+
+        .header-sign a{
+                color: #000;
+                font-weight: 600;
+                padding: 0 0.75rem;
+        }
+        
+        .header-sign a:nth-child(2){
+                border-right: 1px solid #aaa;
+        }
+        .nav-main{
+                display: none;
+        }
+        
+        .about-product-item{
+                width: 33%;
+        }
+        
+        .footer-border{                
+                padding: 0 0 2.5rem 0;
+                display: flex;
+                justify-content: space-around;           
+        }
+
+        #dollar-btn{
+                width: 19rem;
+                height: 2.5rem;
+        }
+
+        .footer-copyright{
+                flex-direction: row; 
+        }
+
+        .footer-copyright-policy{
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+        }
+
+        .footer-copyright-policy-text{                
+                padding: 0.75rem;
+        }
+
+        .copyright{
+                padding: 0.75rem;
+        }
+}
