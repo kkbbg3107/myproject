@@ -1,0 +1,97 @@
+html{
+    overflow-x: hidden;
+}
+h1{
+    margin: 20px;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.col{
+    width: 40%;
+    background: #fff;
+}
+
+.button-group button:hover{
+    color: seagreen;
+    top: -2px;
+    box-shadow: 0 1px 0 0 #aaa,
+                0 2px 0 0 #aaa,
+                0 2px 0 0 #aaa,
+                0 2px 0 0 #aaa,
+                0 2px 0 0 #aaa,
+                0 2px 0 0 #aaa;
+}
+
+.button-group button{  
+    padding:10px 30px;
+    border: none;
+    box-shadow: 0 1px 0 0 #aaa,
+                0 2px 0 0 #aaa,
+                0 3px 0 0 #baa,
+                0 4px 0 0 #3aa,
+                0 5px 0 0 #7aa,
+                0 6px 0 0 #9aa;
+    position: relative;
+    top: -10px;
+    transition: .8s;
+}
+
+.button-group{
+    position: sticky;
+    top: 0;
+    background-color: #fff;    
+    font-size: 20px;
+    z-index: 1;
+    display: flex;
+    padding: 0 0 1.5rem;  
+}
+
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    margin: 10px;
+}
+
+.card-title {
+    color: transparent;
+    text-align: center;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.card-body:hover .card-title{
+    color: #ff0;
+    
+    
+}
+.card-body{
+    background: radial-gradient(closest-corner at 40% 40%,#77E3FC,#62D2EE,#BA1300,#F55900,#FF9A1B);
+}
+
+.card-body img{
+    filter: brightness(0);
+}
+.card-body:hover img{
+    transition: .5s;
+    /* background: radial-gradient(#e66465, #9198e5); */
+    filter: brightness(100%);
+}
+
+
+span {    
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.card-body .btn_detail{
+    width: 80px;
+    font-family: 'Noto Sans TC', sans-serif;
+    display: flex;
+    flex-direction: column;   
+    color: #fff;
+    background-color: #4098E6;  
+    text-align: center;   
+}

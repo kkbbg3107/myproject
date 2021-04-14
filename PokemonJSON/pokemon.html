@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Outline&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&family=Yanone+Kaffeesatz:wght@600&display=swap"
+        rel="stylesheet">
+
+
+</head>
+
+<body>
+    
+    <template id="pokemonCard">
+        <div class="card" style="width: 16rem;">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <img src="" alt="">
+                <span id="type"></span>
+                <a href="#" class="btn_detail">詳細內容</a>
+            </div>
+        </div>
+    </template>
+
+    <div class="about" id="app">
+        <div class="button-group">
+            <div class="col">
+                <h1>Pokemon</h1>
+                <button id='addall'>Pokemon view</button>
+                <button id='add'>Add-Card</button>
+                <button id='reduce'>Reduce-Card</button>
+                <button id="reset">Reset</button>
+            </div>            
+        </div>
+        <div id='container'>
+            <pokemon v-bind:pokemon = "pokemonData.pokemonArray[0]" v-on:button-click="showModelData(data.index)">
+            </pokemon>
+        </div>              
+    </div>
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="pokemon_name" id="exampleModalLabel"></h5>
+                </div>
+                <div class="modal-body">
+                    <img id="pokemon_pic">
+                    <p id="pokemon_txt"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+    <!-- <script type= "module" src="vue.js"></script> -->
+    <script>
+        window.onload = () => getPokemonJSON();
+        pokemonArrayNew = [];
+        pokemonArray = [];
+        // var container = document.getElementById('container');
+        var n = 0;
+        let pic;
+
+        let resetBtn = document.getElementById('reset');
+        let addBtn = document.getElementById('add');
+        let reduceBtn = document.getElementById('reduce');
+        addBtn.addEventListener('click', function () { //點擊後增加一張卡片                                   
+            JoinCard(n);
+            n++;
+
+        })
+        reduceBtn.addEventListener('click', function () { //點擊後減少一張圖片 從最後開始減
+            --n;
+            reduceCard(n);
+        })
+
+        addall.addEventListener('click', function () {
+            catchPokemon();
+        })
+
+        resetBtn.addEventListener('click', function () {
+            reseting();
+        })
+
+
+
+
+        function getPokemonJSON() {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                pokemonArray = JSON.parse(this.responseText);
+                TransformData(pokemonArray);
+            }
+            xhr.open("GET", "https://raw.githubusercontent.com/apprunner/pokemon.json/master/pokedex.json");
+            xhr.send();
+        }
+
+
+        function TransformData(dataArray) {
+            dataArray.forEach(item => {
+                let id = item.id.toString().padStart(3, "0");
+                let name = item.name.chinese;
+                let hp = item.base.HP;
+                let attack = item.base.Attack;
+                let defense = item.base.Defense;
+                let sp_attack = item.base["Sp. Attack"];
+                let sp_defense = item.base["Sp. Defense"];
+                let speed = item.base.Speed;
+                let type = item.type;
+                let img = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
+                let pokemon = {
+                    Id: id,
+                    Name: name,
+                    Hp: hp,
+                    Attack: attack,
+                    Defense: defense,
+                    SpAttack: sp_attack,
+                    SpDefense: sp_defense,
+                    Speed: speed,
+                    Type: type,
+                    Img: img
+                };
+                pokemonArrayNew.push(pokemon);
+            });
+        }
+
+
+        // 導入卡片
+
+        function JoinCard(n) {
+            let container = document.getElementById('container');
+            let card = document.getElementById('pokemonCard');
+            let cloneContent = card.content.cloneNode(true);
+            cloneContent.querySelector('h5').textContent = pokemonArrayNew[n].Name;
+            cloneContent.querySelector('img').src = pokemonArrayNew[n].Img;
+            cloneContent.querySelector('#type').innerText = pokemonArrayNew[n].Type; //加入屬性            
+            //MODAL   
+            cloneContent.querySelector('.btn_detail').addEventListener('click', function () {
+                this.setAttribute("data-toggle", "modal");
+                this.setAttribute("data-target", "#exampleModal");
+                let modal = document.querySelector('#exampleModal');
+                modal.querySelector('.pokemon_name').innerText = pokemonArrayNew[n].Name;
+                modal.querySelector('#pokemon_pic').src = pokemonArrayNew[n].Img;
+                modal.querySelector('#pokemon_txt').innerText =
+                `ID:${pokemonArrayNew[n].Id}
+                HP:${pokemonArrayNew[n].Hp}
+                攻擊力:${pokemonArrayNew[n].Attack}
+                防禦力:${pokemonArrayNew[n].Defense}
+                特殊攻擊力:${pokemonArrayNew[n].SpAttack}
+                特殊防禦力:${pokemonArrayNew[n].SpDefense}
+                速度:${pokemonArrayNew[n].Speed}`;
+            })
+            container.append(cloneContent);
+        }
+
+
+
+
+        function catchPokemon() {
+            for (let i = 0; i < 890; i++) {
+                JoinCard(i);
+            }
+        }
+
+        function addCard() { //按下去生成圖片
+            n++;
+            pic = document.createElement('img');
+            let fileName = n.toString().padStart(3, '0');
+            pic.src = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
+            container.appendChild(pic);
+        }
+
+        function reduceCard(na) { //按下去減掉一張圖片 
+            container.removeChild(container.lastElementChild);
+        }
+
+        function reseting() {
+            container.textContent = '';
+            n = 0;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
